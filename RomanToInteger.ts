@@ -21,15 +21,10 @@ function combineWithNextCharacter(current: string, next: string): number {
 
 function romanToInt(s: string): number {
   let result = 0;
-  let nextCharSkip = false;
+  let i = 0;
 
-  for (let i = 0; i < s.length; i++) {
+  while (i < s.length) {
     const char = s[i];
-
-    if (nextCharSkip) {
-      nextCharSkip = false;
-      continue;
-    }
 
     // On last character
     if (i == s.length - 1) {
@@ -42,11 +37,12 @@ function romanToInt(s: string): number {
     // If it is not combined with next character
     if (output == -1) {
       result += map.get(char);
+      i += 1;
     }
     // If it is combined
     else {
-      nextCharSkip = true;
       result += output;
+      i += 2;
     }
   }
 
